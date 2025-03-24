@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.financialsys.backend.model.User;
@@ -13,9 +14,10 @@ import br.com.financialsys.backend.repository.UserRepository;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public User createUser(Long idUser, String name, String password) {
-        User user = new User(idUser, name, password);
+    public User createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
     }
