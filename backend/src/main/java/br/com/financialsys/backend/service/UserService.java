@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.financialsys.backend.dto.LoginDTO;
 import br.com.financialsys.backend.model.User;
 import br.com.financialsys.backend.repository.UserRepository;
 
@@ -26,13 +27,18 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public boolean authenticateUser(String name, String password) {
-        Optional<User> userOptional = userRepository.findByName(name);
+    public boolean authenticateUser(LoginDTO login) {
+        Optional<User> userOptional = userRepository.findByName(login.getUsername());
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            return user.getPassword().equals(password);
+            return passwordEncoder.matches(login.getPassword(), user.getPassword());
         }
         return false;
+    }
+
+    public User findUserByUsername(String username) {
+        return userRepository.findByName(username)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 }
