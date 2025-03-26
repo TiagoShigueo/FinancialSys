@@ -3,14 +3,16 @@ package br.com.financialsys.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.financialsys.backend.dto.LoginDTO;
+import br.com.financialsys.backend.dto.UserDTO;
 import br.com.financialsys.backend.model.User;
 import br.com.financialsys.backend.service.UserService;
 
@@ -31,7 +33,17 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public boolean authenticateUser(@RequestParam String name, @RequestParam String password) {
-        return userService.authenticateUser(name, password);
+    public ResponseEntity<UserDTO> authenticateUser(@RequestBody LoginDTO login) {
+        boolean valid = userService.authenticateUser(login);
+        if (valid) {
+            try {
+                User user = userService.findUserByUsername(login.getUsername());
+                UserDTO userDTO = new UserDTO(user.getName(), user.getRole());
+                return ResponseEntity.ok(userDTO);
+            } catch (RuntimeException e) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } else
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 }
