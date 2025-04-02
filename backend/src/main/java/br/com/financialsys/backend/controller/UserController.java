@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.financialsys.backend.dto.LoginDTO;
 import br.com.financialsys.backend.dto.UserDTO;
 import br.com.financialsys.backend.model.User;
+import br.com.financialsys.backend.service.TokenService;
 import br.com.financialsys.backend.service.UserService;
 
 @RestController
@@ -21,6 +22,9 @@ import br.com.financialsys.backend.service.UserService;
 public class UserController {
     @Autowired
     private final UserService userService = new UserService();
+
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -33,13 +37,13 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity<UserDTO> authenticateUser(@RequestBody LoginDTO login) {
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginDTO login) {
         boolean valid = userService.authenticateUser(login);
         if (valid) {
             try {
                 User user = userService.findUserByUsername(login.getUsername());
-                UserDTO userDTO = new UserDTO(user.getName(), user.getRole());
-                return ResponseEntity.ok(userDTO);
+                String token = tokenService.generateToken(user);
+                return ResponseEntity.ok(token);
             } catch (RuntimeException e) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
