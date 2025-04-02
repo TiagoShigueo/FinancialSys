@@ -1,7 +1,6 @@
 package br.com.financialsys.backend.security;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.com.financialsys.backend.model.User;
 import br.com.financialsys.backend.repository.UserRepository;
 import br.com.financialsys.backend.service.TokenService;
 import jakarta.servlet.FilterChain;
