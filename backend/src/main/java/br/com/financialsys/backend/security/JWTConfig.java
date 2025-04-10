@@ -1,9 +1,12 @@
 package br.com.financialsys.backend.security;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -36,11 +39,18 @@ public class JWTConfig extends OncePerRequestFilter {
             throws ServletException, IOException {
         var token = this.recoverToken(request);
         if (token != null) {
-            var login = tokenService.validateToken(token);
-            UserDetails user = userRepository.findOneByName(login);
+            var decodedJWT = tokenService.validateToken(token);
+            if (decodedJWT != null) {
+                String user = decodedJWT.getSubject();
+                String role = decodedJWT.getClaim("role").asString();
 
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                System.out.println("User role: " + role);
+
+                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
+
+                var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
         filterChain.doFilter(request, response);
     }
