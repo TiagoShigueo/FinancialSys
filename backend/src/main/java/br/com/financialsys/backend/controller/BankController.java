@@ -1,5 +1,6 @@
 package br.com.financialsys.backend.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,13 @@ public class BankController {
     private BankService bankService;
 
     @PostMapping("/createBank")
-    public ResponseEntity<Bank> createBank(@RequestBody Bank bank) {
-        return ResponseEntity.ok(bankService.createBank(bank));
+    public ResponseEntity<Bank> createBank(@RequestBody Bank bank, Principal principal) {
+        String username = principal.getName();
+        return ResponseEntity.ok(bankService.createBank(bank, username));
     }
 
     @GetMapping("/getAllBanks")
     public List<Bank> getAllBanks() {
-        System.out.println("BankController teste");
         return bankService.getAllBanks();
     }
 
