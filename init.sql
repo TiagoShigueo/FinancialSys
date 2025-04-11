@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS banks (
 
 CREATE TABLE IF NOT EXISTS transactions (
   id_transaction BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  transactionType VARCHAR(255),
+  transaction_type VARCHAR(255),
+  date DATE,
   amount double,
   description VARCHAR(255),
   category VARCHAR(255),
