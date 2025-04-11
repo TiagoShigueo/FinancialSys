@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.financialsys.backend.dto.BankDTO;
 import br.com.financialsys.backend.exception.BankAlreadyExistsException;
+import br.com.financialsys.backend.mapper.BankMapper;
 import br.com.financialsys.backend.model.Bank;
 import br.com.financialsys.backend.model.User;
 import br.com.financialsys.backend.repository.BankRepository;
@@ -26,19 +27,22 @@ public class BankService {
         List<Bank> banks = bankRepository.findAll();
         return banks.stream().map(bank -> new BankDTO(
                 bank.getIdBank(),
-                bank.getName(),
-                bank.getUser().getName())).collect(Collectors.toList());
+                bank.getName())).collect(Collectors.toList());
     }
 
-    public Bank createBank(Bank bank, String username) {
+    public BankDTO createBank(BankDTO bankdto, String username) {
         User user = userRepository.findByName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
-        bank.setUser(user);
+        Bank bank = new Bank();
+        bank = BankMapper.toEntity(bankdto, user);
+
         if (bankRepository.existsByName(bank.getName())) {
             throw new BankAlreadyExistsException("O banco com o nome " + bank.getName() + " já existe.");
         }
-
-        return bankRepository.save(bank);
+        Bank saved = bankRepository.save(bank);
+        BankDTO dto = new BankDTO();
+        dto = BankMapper.toDTO(saved);
+        return dto;
     }
 
 }
