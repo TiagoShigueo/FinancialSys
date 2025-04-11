@@ -43,8 +43,6 @@ public class JWTConfig extends OncePerRequestFilter {
                 String user = decodedJWT.getSubject();
                 String role = decodedJWT.getClaim("role").asString();
 
-                System.out.println("User role: " + role);
-
                 List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
 
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
