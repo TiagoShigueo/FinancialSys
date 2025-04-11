@@ -12,5 +12,4 @@ import lombok.Setter;
 public class BankDTO {
     private Long idBank;
     private String name;
-    private String username;
 }

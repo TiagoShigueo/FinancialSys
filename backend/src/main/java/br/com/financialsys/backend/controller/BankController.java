@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.financialsys.backend.dto.BankDTO;
-import br.com.financialsys.backend.model.Bank;
 import br.com.financialsys.backend.service.BankService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +21,12 @@ public class BankController {
     @Autowired
     private BankService bankService;
 
-    // Arrumar para receber DTO
     @PostMapping("/createBank")
-    public ResponseEntity<BankDTO> createBank(@RequestBody Bank bank, Principal principal) {
+    public ResponseEntity<BankDTO> createBank(@RequestBody BankDTO bankdto, Principal principal) {
         String username = principal.getName();
-        Bank createdBank = bankService.createBank(bank, username);
-        BankDTO bankDTO = new BankDTO(
-                createdBank.getIdBank(),
-                createdBank.getName(),
-                createdBank.getUser().getName());
-        return ResponseEntity.ok(bankDTO);
+        BankDTO createdBankdto = new BankDTO();
+        createdBankdto = bankService.createBank(bankdto, username);
+        return ResponseEntity.ok(createdBankdto);
     }
 
     @GetMapping("/getAllBanks")
