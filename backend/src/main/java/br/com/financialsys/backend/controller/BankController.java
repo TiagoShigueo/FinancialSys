@@ -22,6 +22,7 @@ public class BankController {
     @Autowired
     private BankService bankService;
 
+    // Arrumar para receber DTO
     @PostMapping("/createBank")
     public ResponseEntity<BankDTO> createBank(@RequestBody Bank bank, Principal principal) {
         String username = principal.getName();
