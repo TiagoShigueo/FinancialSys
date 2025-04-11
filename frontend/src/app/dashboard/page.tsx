@@ -13,7 +13,7 @@ export default function dashboard() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen">
       <h1>Página de Dashboard</h1>
 
       <button type="submit" onClick={handleLogout}>
