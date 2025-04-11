@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const login = async (username: string, password: string) => {
-  const response = await fetch(`${BASE_URL}/users/auth`, {
+  const response = await fetch(`${BASE_URL}/api/users/auth`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
