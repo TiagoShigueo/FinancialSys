@@ -1,4 +1,5 @@
 export interface Bank {
-  id: number;
+  idBank: number;
   name: string;
+  username: string;
 }

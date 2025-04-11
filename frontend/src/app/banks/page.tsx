@@ -4,7 +4,7 @@ import { getAllBanks } from "@/services/bank";
 import { Bank } from "@/types/bank";
 import { useEffect, useState } from "react";
 
-export default function banks() {
+export default function Banks() {
   const [banks, setBanks] = useState<Bank[]>([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function banks() {
       <h1>Bancos</h1>
       <ul>
         {banks.map((bank) => (
-          <li key={bank.id}>{bank.name}</li>
+          <li key={bank.idBank}>{bank.name}</li>
         ))}
       </ul>
     </>
