@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { logout } from "@/services/auth";
 import { useRouter } from "next/navigation";
 
-export default function dashboard() {
+export default function Dashboard() {
   const router = useRouter();
 
   const handleLogout = async () => {
