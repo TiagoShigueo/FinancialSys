@@ -14,8 +14,11 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="mb-2">
-            <Link href="/banks" className="block hover:bg-gray-700 p-2 rounded">
-              Bancos
+            <Link
+              href="/transactions"
+              className="block hover:bg-gray-700 p-2 rounded"
+            >
+              Transações
             </Link>
           </li>
           <li className="mb-2">
