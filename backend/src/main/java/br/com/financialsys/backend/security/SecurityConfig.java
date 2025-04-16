@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/api/users/createUser", "/api/users/auth").permitAll()
-                        .requestMatchers("/banks/**").hasAnyAuthority("Admin", "User")
+                        .requestMatchers("/banks/**", "/transactions/**").hasAnyAuthority("Admin", "User")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
