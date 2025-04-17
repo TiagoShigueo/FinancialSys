@@ -1,9 +1,11 @@
 package br.com.financialsys.backend.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,5 +25,12 @@ public class TransactionController {
             Principal principal) {
         String username = principal.getName();
         return ResponseEntity.ok(transactionService.createTransaction(transactiondto, username));
+    }
+
+    @GetMapping("/getUserTransactions")
+    public List<TransactionDTO> getUserTransactions(Principal principal) {
+        String username = principal.getName();
+        return transactionService.getUserTransactions(username);
+
     }
 }
