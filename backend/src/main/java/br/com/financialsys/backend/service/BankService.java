@@ -27,7 +27,7 @@ public class BankService {
         List<Bank> banks = bankRepository.findAll();
         return banks.stream().map(bank -> new BankDTO(
                 bank.getIdBank(),
-                bank.getName())).collect(Collectors.toList());
+                bank.getName())).toList();
     }
 
     public BankDTO createBank(BankDTO bankdto, String username) {
