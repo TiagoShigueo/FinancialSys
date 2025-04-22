@@ -1,0 +1,24 @@
+package br.com.financialsys.backend.dto;
+
+import java.time.LocalDate;
+
+import br.com.financialsys.backend.model.TransactionType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TransactionResponseDTO {
+    private Long idTransaction;
+    private TransactionType transactionType;
+    private LocalDate date;
+    private double amount;
+    private String description;
+    private String category;
+    private String originBank;
+    private String destinationBank;
+}

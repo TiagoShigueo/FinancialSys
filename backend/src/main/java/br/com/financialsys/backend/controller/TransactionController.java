@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.financialsys.backend.dto.TransactionDTO;
+import br.com.financialsys.backend.dto.TransactionResponseDTO;
 import br.com.financialsys.backend.service.TransactionService;
 
 @RestController
@@ -28,7 +29,7 @@ public class TransactionController {
     }
 
     @GetMapping("/getUserTransactions")
-    public List<TransactionDTO> getUserTransactions(Principal principal) {
+    public List<TransactionResponseDTO> getUserTransactions(Principal principal) {
         String username = principal.getName();
         return transactionService.getUserTransactions(username);
 

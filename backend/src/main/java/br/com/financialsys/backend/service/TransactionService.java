@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.financialsys.backend.dto.TransactionDTO;
+import br.com.financialsys.backend.dto.TransactionResponseDTO;
 import br.com.financialsys.backend.mapper.TransactionMapper;
 import br.com.financialsys.backend.model.Bank;
 import br.com.financialsys.backend.model.Transaction;
@@ -53,11 +54,11 @@ public class TransactionService {
                 return dto;
         }
 
-        public List<TransactionDTO> getUserTransactions(String username) {
+        public List<TransactionResponseDTO> getUserTransactions(String username) {
                 User user = userRepository.findByName(username)
                                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
                 List<Transaction> transaction = transactionRepository.findAllByUser_IdUser(user.getIdUser());
-                List<TransactionDTO> dto = transaction.stream().map(TransactionMapper::toDTO).toList();
+                List<TransactionResponseDTO> dto = transaction.stream().map(TransactionMapper::toResponseDTO).toList();
                 return dto;
         }
 }
