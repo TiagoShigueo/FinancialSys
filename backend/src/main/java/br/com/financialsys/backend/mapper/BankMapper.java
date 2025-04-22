@@ -9,6 +9,7 @@ public class BankMapper {
         Bank b = new Bank();
         b.setIdBank(dto.getIdBank());
         b.setName(dto.getName());
+        b.setInitialBalance(dto.getInitialBalance());
         b.setUser(user);
         return b;
     }
@@ -17,6 +18,7 @@ public class BankMapper {
         BankDTO dto = new BankDTO();
         dto.setIdBank(bank.getIdBank());
         dto.setName(bank.getName());
+        dto.setInitialBalance(bank.getInitialBalance());
         return dto;
     }
 }

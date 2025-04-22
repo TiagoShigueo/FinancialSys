@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS banks (
   id_bank BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
+  initial_balance double,
   user_id BIGINT,
   FOREIGN KEY (user_id) REFERENCES users (id_user)
 );

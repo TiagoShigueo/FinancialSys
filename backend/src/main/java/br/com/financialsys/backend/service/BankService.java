@@ -1,7 +1,6 @@
 package br.com.financialsys.backend.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,9 +24,8 @@ public class BankService {
 
     public List<BankDTO> getAllBanks() {
         List<Bank> banks = bankRepository.findAll();
-        return banks.stream().map(bank -> new BankDTO(
-                bank.getIdBank(),
-                bank.getName())).toList();
+        List<BankDTO> dto = banks.stream().map(BankMapper::toDTO).toList();
+        return dto;
     }
 
     public BankDTO createBank(BankDTO bankdto, String username) {

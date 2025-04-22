@@ -28,6 +28,9 @@ public class Bank {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "initial_balance")
+    private double initialBalance;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id_user", nullable = false)
     private User user;
