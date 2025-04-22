@@ -4,9 +4,11 @@ import { getUserTransactions } from "@/services/transaction";
 import { TransactionResponse } from "@/types/transactionResponse";
 import { formatDate } from "@/utils/formatDate";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState<TransactionResponse[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -16,9 +18,16 @@ export default function Transactions() {
     fetchTransactions();
   }, []);
 
+  const newTransaction = async () => {
+    router.push("/transactions/newTransaction");
+  };
+
   return (
     <div>
       <h1>Transações</h1>
+      <button type="submit" onClick={newTransaction}>
+        Nova transação
+      </button>
       <table className="table-auto border-separate border border-green-800">
         <thead>
           <tr>
@@ -35,7 +44,6 @@ export default function Transactions() {
           {transactions.map((transaction) => (
             <tr key={transaction.idTransaction}>
               <td>{formatDate(String(transaction.date))}</td>
-              {/* Preciso de um método para converter o formato da data */}
               <td>{transaction.originBank}</td>
               <td>{transaction.destinationBank}</td>
               <td>{transaction.transactionType}</td>
