@@ -2,6 +2,7 @@
 
 import { getUserTransactions } from "@/services/transaction";
 import { TransactionResponse } from "@/types/transactionResponse";
+import { formatDate } from "@/utils/formatDate";
 import { useEffect, useState } from "react";
 
 export default function Transactions() {
@@ -33,7 +34,7 @@ export default function Transactions() {
         <tbody>
           {transactions.map((transaction) => (
             <tr key={transaction.idTransaction}>
-              <td>{String(transaction.date)}</td>
+              <td>{formatDate(String(transaction.date))}</td>
               {/* Preciso de um método para converter o formato da data */}
               <td>{transaction.originBank}</td>
               <td>{transaction.destinationBank}</td>
