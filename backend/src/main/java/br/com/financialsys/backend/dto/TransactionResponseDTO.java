@@ -1,5 +1,6 @@
 package br.com.financialsys.backend.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import br.com.financialsys.backend.model.TransactionType;
@@ -16,7 +17,7 @@ public class TransactionResponseDTO {
     private Long idTransaction;
     private TransactionType transactionType;
     private LocalDate date;
-    private double amount;
+    private BigDecimal amount;
     private String description;
     private String category;
     private String originBank;

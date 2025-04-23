@@ -1,5 +1,7 @@
 package br.com.financialsys.backend.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +31,7 @@ public class Bank {
     private String name;
 
     @Column(name = "initial_balance")
-    private double initialBalance;
+    private BigDecimal initialBalance;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id_user", nullable = false)

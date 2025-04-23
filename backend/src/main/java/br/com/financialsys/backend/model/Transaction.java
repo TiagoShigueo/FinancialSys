@@ -1,5 +1,6 @@
 package br.com.financialsys.backend.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -37,7 +38,7 @@ public class Transaction {
     private TransactionType transactionType;
 
     @Column(name = "amount")
-    private double amount;
+    private BigDecimal amount;
 
     @Column(name = "description", nullable = true)
     private String description;
