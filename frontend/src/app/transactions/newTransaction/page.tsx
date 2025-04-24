@@ -40,9 +40,6 @@ export default function NewTransactions() {
 
   const handleCreateTransaction = async (event: React.FormEvent) => {
     event.preventDefault();
-    {
-      /*Depois dá para remover isso. Ele é bom para debugar o código*/
-    }
     createTransaction(transaction);
     router.push("/transactions");
   };
