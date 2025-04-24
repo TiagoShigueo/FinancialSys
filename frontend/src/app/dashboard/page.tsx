@@ -1,6 +1,5 @@
 "use client";
 
-import Cookies from "js-cookie";
 import { logout } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
