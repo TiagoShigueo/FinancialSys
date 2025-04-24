@@ -32,10 +32,8 @@ export default function Banks() {
   };
 
   const handleCreateBank = async (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log(bank);
     createBank(bank);
-    // router.push("/transactions/newTransaction");
+    router.push("/transactions/newTransaction");
   };
 
   return (
