@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.financialsys.backend.dto.BalanceDTO;
 import br.com.financialsys.backend.dto.BankDTO;
+import br.com.financialsys.backend.service.BalanceService;
 import br.com.financialsys.backend.service.BankService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class BankController {
     @Autowired
     private BankService bankService;
+
+    @Autowired
+    private BalanceService balanceService;
 
     @PostMapping("/createBank")
     public ResponseEntity<BankDTO> createBank(@RequestBody BankDTO bankdto, Principal principal) {
@@ -33,4 +38,10 @@ public class BankController {
     public List<BankDTO> getAllBanks() {
         return bankService.getAllBanks();
     }
+
+    @GetMapping("/getAllBalances")
+    public List<BalanceDTO> getAllBalances(Principal principal) {
+        return balanceService.getAllBalances(principal.getName());
+    }
+
 }
