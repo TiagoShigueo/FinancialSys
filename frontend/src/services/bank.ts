@@ -1,3 +1,4 @@
+import { Balance } from "@/types/balance";
 import { Bank } from "@/types/bank";
 import Cookies from "js-cookie";
 
@@ -21,9 +22,25 @@ export const getAllBanks = async (): Promise<Bank[] | undefined> => {
     }
 
     const data: Bank[] = await res.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Erro na requisição:", error);
+  }
+};
+
+export const getAllBalances = async (): Promise<Balance[] | undefined> => {
+  const token = String("Bearer " + Cookies.get("token"));
+  try {
+    const res = await fetch(`${BASE_URL}/banks/getAllBalances`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data: Balance[] = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Erro na requisição: ", error);
   }
 };
