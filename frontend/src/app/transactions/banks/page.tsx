@@ -8,8 +8,7 @@ import React, { useEffect, useState } from "react";
 export default function Banks() {
   const router = useRouter();
   const [banks, setBanks] = useState<Bank[]>([]);
-  const [bank, setBank] = useState<Bank>({
-    idBank: null,
+  const [bank, setBank] = useState<Omit<Bank, "idBank">>({
     name: "",
     initialBalance: 0,
   });
@@ -32,6 +31,7 @@ export default function Banks() {
   };
 
   const handleCreateBank = async (event: React.FormEvent) => {
+    event.preventDefault();
     createBank(bank);
     router.push("/transactions/newTransaction");
   };
@@ -45,23 +45,16 @@ export default function Banks() {
         ))}
       </ul>
       <h1>Novo banco</h1>
-      <form onSubmit={handleCreateBank} method="post">
+      <form onSubmit={handleCreateBank}>
         <div className="p-4">
           <label>Nome do banco: </label>
-          <input
-            type="text"
-            name="name"
-            value={bank.name}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="name" onChange={handleChange} required />
         </div>
         <div className="p-4">
           <label>Saldo inicial: R$ </label>
           <input
             type="number"
             name="initialBalance"
-            value={bank.initialBalance}
             onChange={handleChange}
             required
           />

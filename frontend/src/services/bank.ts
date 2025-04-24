@@ -28,7 +28,7 @@ export const getAllBanks = async (): Promise<Bank[] | undefined> => {
   }
 };
 
-export const createBank = async (bank: Bank) => {
+export const createBank = async (bank: Omit<Bank, "idBank">) => {
   const token = String("Bearer " + Cookies.get("token"));
   try {
     const res = await fetch(`${BASE_URL}/banks/createBank`, {
