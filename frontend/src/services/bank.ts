@@ -28,6 +28,31 @@ export const getAllBanks = async (): Promise<Bank[] | undefined> => {
   }
 };
 
+export const createBank = async (bank: Bank) => {
+  const token = String("Bearer " + Cookies.get("token"));
+  try {
+    const res = await fetch(`${BASE_URL}/banks/createBank`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bank),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error("Erro na requisição: ", res.status, errText);
+      return;
+    }
+
+    const data: Bank = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Erro na requisição: ", error);
+  }
+};
+
 export const getAllBalances = async (): Promise<Balance[] | undefined> => {
   const token = String("Bearer " + Cookies.get("token"));
   try {

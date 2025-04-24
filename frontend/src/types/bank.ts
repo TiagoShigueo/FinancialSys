@@ -1,5 +1,5 @@
 export interface Bank {
-  idBank: number;
+  idBank: number | null;
   name: string;
-  username: string;
+  initialBalance: number;
 }

@@ -1,12 +1,18 @@
 "use client";
 
-import { getAllBanks } from "@/services/bank";
+import { createBank, getAllBanks } from "@/services/bank";
 import { Bank } from "@/types/bank";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export default function Banks() {
+  const router = useRouter();
   const [banks, setBanks] = useState<Bank[]>([]);
-
+  const [bank, setBank] = useState<Bank>({
+    idBank: null,
+    name: "",
+    initialBalance: 0,
+  });
   useEffect(() => {
     const fetchBanks = async () => {
       const data = await getAllBanks();
@@ -17,6 +23,21 @@ export default function Banks() {
     fetchBanks();
   }, []);
 
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setBank((prev) => ({
+      ...prev,
+      [name]: name === "initialBalance" ? parseFloat(value) : value,
+    }));
+  };
+
+  const handleCreateBank = async (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log(bank);
+    createBank(bank);
+    // router.push("/transactions/newTransaction");
+  };
+
   return (
     <>
       <h1>Bancos</h1>
@@ -25,6 +46,32 @@ export default function Banks() {
           <li key={bank.idBank}>{bank.name}</li>
         ))}
       </ul>
+      <h1>Novo banco</h1>
+      <form onSubmit={handleCreateBank} method="post">
+        <div className="p-4">
+          <label>Nome do banco: </label>
+          <input
+            type="text"
+            name="name"
+            value={bank.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="p-4">
+          <label>Saldo inicial: R$ </label>
+          <input
+            type="number"
+            name="initialBalance"
+            value={bank.initialBalance}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <button type="submit">Enviar</button>
+        </div>
+      </form>
     </>
   );
 }
