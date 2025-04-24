@@ -1,9 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Sidebar() {
   return (
     <aside className="w-64 bg-gray-900 text-white h-screen p-4 overflow-y-auto">
       <nav>
+        <Image
+          src="/LogoDesenhoFinancialSys.png"
+          width={150}
+          height={150}
+          alt="Logo do Financial Sys com um símbolo moderno de crescimento financeiro, composto por um cifrão
+                integrado a uma seta apontando para cima, ao lado do nome da empresa em letras maiúsculas e fonte limpa, 
+                em tom azul-turquesa sobre fundo transparente"
+        />
         <ul>
           <li className="mb-2">
             <Link
