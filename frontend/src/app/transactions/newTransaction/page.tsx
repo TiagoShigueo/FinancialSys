@@ -4,6 +4,7 @@ import { getAllBanks } from "@/services/bank";
 import { createTransaction } from "@/services/transaction";
 import { Bank } from "@/types/bank";
 import { Transaction } from "@/types/transaction";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function NewTransactions() {
@@ -18,7 +19,7 @@ export default function NewTransactions() {
     destinationBankId: null,
   });
   const [banks, setBanks] = useState<Bank[]>([]);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchBanks = async () => {
       const data = await getAllBanks();
@@ -42,9 +43,8 @@ export default function NewTransactions() {
     {
       /*Depois dá para remover isso. Ele é bom para debugar o código*/
     }
-    console.log(banks);
-    console.log(transaction);
     createTransaction(transaction);
+    router.push("/transactions");
   };
 
   return (
