@@ -44,6 +44,10 @@ export default function NewTransactions() {
     router.push("/transactions");
   };
 
+  const toNewBank = async () => {
+    router.push("/transactions/banks");
+  };
+
   return (
     <div className="bg-gradient-to-b from-blue-200">
       <h1>Transações</h1>
@@ -109,6 +113,7 @@ export default function NewTransactions() {
               </select>
             </>
           )}
+          <button onClick={toNewBank}>Novo banco</button>
         </div>
 
         <div>
