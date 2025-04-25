@@ -1,6 +1,5 @@
 "use client";
 
-import { logout } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAllBalances } from "@/services/bank";
@@ -16,11 +15,6 @@ export default function Dashboard() {
     };
     fetchBalances();
   }, []);
-
-  const handleLogout = async () => {
-    logout();
-    router.push("/login");
-  };
 
   return (
     <div className="min-h-screen">
