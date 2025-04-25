@@ -30,7 +30,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full h-14 bg-gray-900 px-6 flex items-center justify-between text-white">
+    <nav className="w-full h-14  px-6 flex items-center justify-between text-white">
       <h1 className="text-lg">Olá {username}</h1>
       <button
         onClick={handleLogout}

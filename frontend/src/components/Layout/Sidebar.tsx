@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-gray-900 text-white h-screen p-4 overflow-y-auto">
+    <aside className="w-44  text-white h-screen p-4 overflow-y-auto">
       <nav>
         <Image
           src="/LogoDesenhoFinancialSys.png"

@@ -18,11 +18,13 @@ export default function LayoutWrapper({
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-gradient-to-r from-blue-600">
       <Sidebar />
       <div className="flex flex-col flex-1">
         <Navbar />
-        <main className="flex-1 p-6"> {children}</main>
+        <main className="flex-1 p-6 bg-gradient-to-r from-gray-700">
+          {children}
+        </main>
       </div>
     </div>
   );
