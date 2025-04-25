@@ -10,7 +10,7 @@ export const getAllBanks = async (): Promise<Bank[] | undefined> => {
     const res = await fetch(`${BASE_URL}/banks/getAllBanks`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
         "Content-Type": "application/json",
       },
     });
@@ -34,7 +34,7 @@ export const createBank = async (bank: Omit<Bank, "idBank">) => {
     const res = await fetch(`${BASE_URL}/banks/createBank`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(bank),
@@ -59,7 +59,7 @@ export const getAllBalances = async (): Promise<Balance[] | undefined> => {
     const res = await fetch(`${BASE_URL}/banks/getAllBalances`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
         "Content-Type": "application/json",
       },
     });

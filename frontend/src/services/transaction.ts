@@ -10,7 +10,7 @@ export const createTransaction = async (transaction: Transaction) => {
     const res = await fetch(`${BASE_URL}/transactions/createTransaction`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(transaction),
