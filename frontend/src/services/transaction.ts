@@ -1,5 +1,6 @@
 import { Transaction } from "@/types/transaction";
 import { TransactionResponse } from "@/types/transactionResponse";
+import { CategorySummary } from "@/types/categorySummary";
 import Cookies from "js-cookie";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -42,6 +43,27 @@ export const getUserTransactions = async () => {
       },
     });
     const data: TransactionResponse[] = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Erro na requisição: ", error);
+  }
+};
+
+export const getEntraceCategorySummary = async () => {
+  const token = String("Bearer " + Cookies.get("token"));
+
+  try {
+    const res = await fetch(
+      `${BASE_URL}/transactions/getEntraceCategorySummary`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data: CategorySummary[] = await res.json();
     return data;
   } catch (error) {
     console.error("Erro na requisição: ", error);

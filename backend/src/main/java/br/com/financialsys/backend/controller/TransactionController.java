@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.financialsys.backend.dto.CategorySummaryDTO;
 import br.com.financialsys.backend.dto.TransactionDTO;
 import br.com.financialsys.backend.dto.TransactionResponseDTO;
+import br.com.financialsys.backend.service.ReportService;
 import br.com.financialsys.backend.service.TransactionService;
 
 @RestController
@@ -20,6 +22,9 @@ import br.com.financialsys.backend.service.TransactionService;
 public class TransactionController {
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private ReportService reportService;
 
     @PostMapping("/createTransaction")
     public ResponseEntity<TransactionDTO> createTransaction(@RequestBody TransactionDTO transactiondto,
@@ -33,5 +38,11 @@ public class TransactionController {
         String username = principal.getName();
         return transactionService.getUserTransactions(username);
 
+    }
+
+    @GetMapping("/getEntraceCategorySummary")
+    public List<CategorySummaryDTO> getEntraceCategorySummary(Principal principal) {
+        String username = principal.getName();
+        return reportService.getEntraceCategorySummary(username);
     }
 }
