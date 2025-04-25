@@ -69,3 +69,24 @@ export const getIncomeCategorySummary = async () => {
     console.error("Erro na requisição: ", error);
   }
 };
+
+export const getExpenseCategorySummary = async () => {
+  const token = String("Bearer " + Cookies.get("token"));
+
+  try {
+    const res = await fetch(
+      `${BASE_URL}/transactions/getExpenseCategorySummary`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data: CategorySummary[] = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Erro na requisição: ", error);
+  }
+};

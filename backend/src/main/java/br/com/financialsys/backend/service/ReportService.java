@@ -39,4 +39,18 @@ public class ReportService {
         return categorySummaryDTO;
     }
 
+    public List<CategorySummaryDTO> getExpenseCategorySummary(String username) {
+        User user = userRepository.findByName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        List<Transaction> transactions = transactionRepository.findAllByUser_IdUser(user.getIdUser());
+
+        Map<String, BigDecimal> categoryTotals = transactions.stream()
+                .filter(t -> t.getTransactionType() == TransactionType.Saída)
+                .collect(Collectors.groupingBy(Transaction::getCategory,
+                        Collectors.reducing(BigDecimal.ZERO, Transaction::getAmount, BigDecimal::add)));
+        List<CategorySummaryDTO> categorySummaryDTO = ReportMapper.toDTOList(categoryTotals);
+
+        return categorySummaryDTO;
+
+    }
 }

@@ -5,21 +5,32 @@ import { useEffect, useState } from "react";
 import { getAllBalances } from "@/services/bank";
 import { Balance } from "@/types/balance";
 import { CategorySummary } from "@/types/categorySummary";
-import { getIncomeCategorySummary } from "@/services/transaction";
+import {
+  getExpenseCategorySummary,
+  getIncomeCategorySummary,
+} from "@/services/transaction";
 
 export default function Dashboard() {
   const [balances, setBalances] = useState<Balance[]>([]);
-  const [categoriesSummary, setCategoriesSummary] = useState<CategorySummary[]>(
-    []
-  );
+  const [incomeCategoriesSummary, setIncomeCategoriesSummary] = useState<
+    CategorySummary[]
+  >([]);
+  const [expenseCategoriesSummary, setExpenseCategoriesSummary] = useState<
+    CategorySummary[]
+  >([]);
 
   useEffect(() => {
     const fetchBalances = async () => {
       const balanceData = await getAllBalances();
       if (balanceData) setBalances(balanceData);
 
-      const categoriesSummaryData = await getIncomeCategorySummary();
-      if (categoriesSummaryData) setCategoriesSummary(categoriesSummaryData);
+      const incomeCategoriesSummaryData = await getIncomeCategorySummary();
+      if (incomeCategoriesSummaryData)
+        setIncomeCategoriesSummary(incomeCategoriesSummaryData);
+
+      const expenseCategoriesSummary = await getExpenseCategorySummary();
+      if (expenseCategoriesSummary)
+        setExpenseCategoriesSummary(expenseCategoriesSummary);
     };
     fetchBalances();
   }, []);
@@ -43,16 +54,25 @@ export default function Dashboard() {
       <div className="pt-4 flex">
         <div className="border-2 h-128 w-2/6">
           <h1 className="text-center font-bold text-xl">Entradas</h1>
-          {categoriesSummary.map((categorySummary) => (
-            <ul key={categorySummary.category}>
+          {incomeCategoriesSummary.map((incomeCategorySummary) => (
+            <ul key={incomeCategorySummary.category}>
               <li>
-                {categorySummary.category}: R$ {categorySummary.total}
+                {incomeCategorySummary.category}: R${" "}
+                {incomeCategorySummary.total}
               </li>
             </ul>
           ))}
         </div>
         <div className="border-2 h-128 w-2/6 mx-4">
           <h1 className="text-center font-bold text-xl">Saídas</h1>
+          {expenseCategoriesSummary.map((expenseCategorySummary) => (
+            <ul key={expenseCategorySummary.category}>
+              <li>
+                {expenseCategorySummary.category}: R${" "}
+                {expenseCategorySummary.total}
+              </li>
+            </ul>
+          ))}
         </div>
         <div className="border-2 h-128 w-2/6">
           <h1 className="text-center font-bold text-xl">Cartões</h1>

@@ -45,4 +45,10 @@ public class TransactionController {
         String username = principal.getName();
         return reportService.getIncomeCategorySummary(username);
     }
+
+    @GetMapping("/getExpenseCategorySummary")
+    public List<CategorySummaryDTO> getExpenseCategorySummary(Principal principal) {
+        String username = principal.getName();
+        return reportService.getExpenseCategorySummary(username);
+    }
 }
