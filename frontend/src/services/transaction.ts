@@ -49,12 +49,12 @@ export const getUserTransactions = async () => {
   }
 };
 
-export const getEntraceCategorySummary = async () => {
+export const getIncomeCategorySummary = async () => {
   const token = String("Bearer " + Cookies.get("token"));
 
   try {
     const res = await fetch(
-      `${BASE_URL}/transactions/getEntraceCategorySummary`,
+      `${BASE_URL}/transactions/getIncomeCategorySummary`,
       {
         method: "GET",
         headers: {

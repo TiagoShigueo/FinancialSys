@@ -40,9 +40,9 @@ public class TransactionController {
 
     }
 
-    @GetMapping("/getEntraceCategorySummary")
-    public List<CategorySummaryDTO> getEntraceCategorySummary(Principal principal) {
+    @GetMapping("/getIncomeCategorySummary")
+    public List<CategorySummaryDTO> getIncomeCategorySummary(Principal principal) {
         String username = principal.getName();
-        return reportService.getEntraceCategorySummary(username);
+        return reportService.getIncomeCategorySummary(username);
     }
 }

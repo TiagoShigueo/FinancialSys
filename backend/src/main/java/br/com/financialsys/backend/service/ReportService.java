@@ -25,7 +25,7 @@ public class ReportService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public List<CategorySummaryDTO> getEntraceCategorySummary(String username) {
+    public List<CategorySummaryDTO> getIncomeCategorySummary(String username) {
         User user = userRepository.findByName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
         List<Transaction> transactions = transactionRepository.findAllByUser_IdUser(user.getIdUser());
@@ -38,4 +38,5 @@ public class ReportService {
 
         return categorySummaryDTO;
     }
+
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getAllBalances } from "@/services/bank";
 import { Balance } from "@/types/balance";
 import { CategorySummary } from "@/types/categorySummary";
-import { getEntraceCategorySummary } from "@/services/transaction";
+import { getIncomeCategorySummary } from "@/services/transaction";
 
 export default function Dashboard() {
   const [balances, setBalances] = useState<Balance[]>([]);
@@ -18,7 +18,7 @@ export default function Dashboard() {
       const balanceData = await getAllBalances();
       if (balanceData) setBalances(balanceData);
 
-      const categoriesSummaryData = await getEntraceCategorySummary();
+      const categoriesSummaryData = await getIncomeCategorySummary();
       if (categoriesSummaryData) setCategoriesSummary(categoriesSummaryData);
     };
     fetchBalances();
