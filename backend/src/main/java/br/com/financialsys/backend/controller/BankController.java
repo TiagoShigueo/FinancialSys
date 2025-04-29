@@ -35,8 +35,8 @@ public class BankController {
     }
 
     @GetMapping("/getAllBanks")
-    public List<BankDTO> getAllBanks() {
-        return bankService.getAllBanks();
+    public List<BankDTO> getAllUserBanks(Principal p) {
+        return bankService.getAllUserBanks(p.getName());
     }
 
     @GetMapping("/getAllBalances")
