@@ -48,8 +48,13 @@ export default function NewTransactions() {
     router.push("/transactions/banks");
   };
 
+  const toTransactions = async () => {
+    router.push("/transactions");
+  };
+
   return (
     <div className="bg-gradient-to-b from-blue-200">
+      <button onClick={toTransactions}>Voltar</button>
       <h1>Transações</h1>
       <form onSubmit={handleCreateTransaction} method="post">
         <div className="p-4">
@@ -60,6 +65,7 @@ export default function NewTransactions() {
             onChange={handleChange}
             required
           >
+            {/* Tentar colocar um map */}
             <option className="text-black" value="Entrada">
               Entrada
             </option>
@@ -81,7 +87,13 @@ export default function NewTransactions() {
           <input type="text" name="category" onChange={handleChange} required />
           <label>Valor: </label>
           {/* Dá para colocar máscara de dinheiro */}
-          <input type="number" name="amount" onChange={handleChange} required />
+          <input
+            type="number"
+            step="0.01"
+            name="amount"
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div className="p-4">
