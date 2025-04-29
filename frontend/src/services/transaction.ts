@@ -2,6 +2,7 @@ import { Transaction } from "@/types/transaction";
 import { TransactionResponse } from "@/types/transactionResponse";
 import { CategorySummary } from "@/types/categorySummary";
 import Cookies from "js-cookie";
+import { MonthlySummary } from "@/types/monthlySummary";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const createTransaction = async (transaction: Transaction) => {
@@ -85,6 +86,24 @@ export const getExpenseCategorySummary = async () => {
       }
     );
     const data: CategorySummary[] = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Erro na requisição: ", error);
+  }
+};
+
+export const getMonthlySummary = async () => {
+  const token = String("Bearer " + Cookies.get("token"));
+
+  try {
+    const res = await fetch(`${BASE_URL}/transactions/getMonthlySummary`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+        "Content-Type": "applocation/json",
+      },
+    });
+    const data: MonthlySummary[] = await res.json();
     return data;
   } catch (error) {
     console.error("Erro na requisição: ", error);

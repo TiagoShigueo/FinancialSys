@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.financialsys.backend.dto.CategorySummaryDTO;
+import br.com.financialsys.backend.dto.MonthlySummaryDTO;
 import br.com.financialsys.backend.dto.TransactionDTO;
 import br.com.financialsys.backend.dto.TransactionResponseDTO;
 import br.com.financialsys.backend.service.ReportService;
@@ -50,5 +51,11 @@ public class TransactionController {
     public List<CategorySummaryDTO> getExpenseCategorySummary(Principal principal) {
         String username = principal.getName();
         return reportService.getExpenseCategorySummary(username);
+    }
+
+    @GetMapping("/getMonthlySummary")
+    public List<MonthlySummaryDTO> getMonthlySummary(Principal principal) {
+        String username = principal.getName();
+        return reportService.getMonthlySummary(username);
     }
 }
