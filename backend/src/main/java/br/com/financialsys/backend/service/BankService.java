@@ -37,8 +37,9 @@ public class BankService {
         Bank bank = new Bank();
         bank = BankMapper.toEntity(bankdto, user);
 
-        if (bankRepository.existsByName(bank.getName())) {
-            throw new BankAlreadyExistsException("O banco com o nome " + bank.getName() + " já existe.");
+        if (bankRepository.existsByNameAndUser_IdUser(bank.getName(), user.getIdUser())) {
+            throw new BankAlreadyExistsException(
+                    "O banco com o nome " + bank.getName() + " já existe na conta do usuário: " + user.getName());
         }
         Bank saved = bankRepository.save(bank);
         BankDTO dto = new BankDTO();

@@ -12,7 +12,7 @@ import br.com.financialsys.backend.model.Bank;
 public interface BankRepository extends JpaRepository<Bank, Long> {
     Optional<Bank> findByName(String name);
 
-    boolean existsByName(String name);
+    boolean existsByNameAndUser_IdUser(String name, Long idUser);
 
     List<Bank> findAllByUser_IdUser(Long idUser);
 }
