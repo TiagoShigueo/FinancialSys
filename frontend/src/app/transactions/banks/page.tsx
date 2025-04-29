@@ -54,6 +54,7 @@ export default function Banks() {
           <label>Saldo inicial: R$ </label>
           <input
             type="number"
+            step="0.01"
             name="initialBalance"
             onChange={handleChange}
             required
