@@ -34,7 +34,7 @@ public class BankController {
         return ResponseEntity.ok(createdBankdto);
     }
 
-    @GetMapping("/getAllBanks")
+    @GetMapping("/getAllUserBanks")
     public List<BankDTO> getAllUserBanks(Principal p) {
         return bankService.getAllUserBanks(p.getName());
     }

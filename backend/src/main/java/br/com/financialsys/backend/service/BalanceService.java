@@ -71,9 +71,6 @@ public class BalanceService {
             bankBalances.merge(bank, value, BigDecimal::add);
         }
         List<BalanceDTO> result = BalanceMapper.toDTOList(bankBalances);
-
-        // Posso puxar o nome do banco também. Talvez colocar no Balance DTO
-
         return result;
     }
 

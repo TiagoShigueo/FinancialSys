@@ -3,7 +3,6 @@ package br.com.financialsys.backend.service;
 import java.math.BigDecimal;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -69,6 +68,7 @@ public class ReportService {
                                 .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
                 List<Transaction> transactions = transactionRepository.findAllByUser_IdUser(user.getIdUser());
 
+                // Acho que dá para apagar essa linha
                 List<Transaction> filteredTransactions = transactions.stream()
                                 .filter(t -> t.getTransactionType() == TransactionType.Entrada
                                                 || t.getTransactionType() == TransactionType.Saída)

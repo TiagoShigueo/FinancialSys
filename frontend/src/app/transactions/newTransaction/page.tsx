@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllBanks } from "@/services/bank";
+import { getAllUserBanks } from "@/services/bank";
 import { createTransaction } from "@/services/transaction";
 import { Bank } from "@/types/bank";
 import { Transaction } from "@/types/transaction";
@@ -22,7 +22,7 @@ export default function NewTransactions() {
   const router = useRouter();
   useEffect(() => {
     const fetchBanks = async () => {
-      const data = await getAllBanks();
+      const data = await getAllUserBanks();
       if (data) setBanks(data);
     };
     fetchBanks();
@@ -40,6 +40,7 @@ export default function NewTransactions() {
 
   const handleCreateTransaction = async (event: React.FormEvent) => {
     event.preventDefault();
+    console.log(transaction.originBankId);
     createTransaction(transaction);
     router.push("/transactions");
   };

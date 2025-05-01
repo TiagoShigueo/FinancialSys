@@ -4,10 +4,10 @@ import Cookies from "js-cookie";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const getAllBanks = async (): Promise<Bank[] | undefined> => {
+export const getAllUserBanks = async (): Promise<Bank[] | undefined> => {
   const token = String("Bearer " + Cookies.get("token"));
   try {
-    const res = await fetch(`${BASE_URL}/banks/getAllBanks`, {
+    const res = await fetch(`${BASE_URL}/banks/getAllUserBanks`, {
       method: "GET",
       headers: {
         Authorization: token,

@@ -1,6 +1,6 @@
 "use client";
 
-import { createBank, getAllBanks } from "@/services/bank";
+import { createBank, getAllUserBanks } from "@/services/bank";
 import { Bank } from "@/types/bank";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ export default function Banks() {
   });
   useEffect(() => {
     const fetchBanks = async () => {
-      const data = await getAllBanks();
+      const data = await getAllUserBanks();
       if (data) {
         setBanks(data);
       }
