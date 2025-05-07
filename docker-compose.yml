@@ -36,7 +36,17 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_financialsys
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
 
+      
 volumes:
   mysql-volume:
     driver: local
