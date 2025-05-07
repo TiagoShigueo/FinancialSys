@@ -9,8 +9,10 @@ import {
   getIncomeCategorySummary,
   getMonthlySummary,
 } from "@/services/transaction";
-import MonthlyBalanceChart from "@/components/Charts/MonthlyBalanceChart";
+// import MonthlyBalanceChart from "@/components/Charts/MonthlyBalanceChart";
 import { MonthlySummary } from "@/types/monthlySummary";
+
+// export const dynamic = "force-dynamic";
 
 export default function Dashboard() {
   const [balances, setBalances] = useState<Balance[]>([]);
@@ -114,11 +116,11 @@ export default function Dashboard() {
 
       {/* Gráficos */}
       <div className="bg-gray-700 border-2 h-80 w-full mt-4">
-        <MonthlyBalanceChart
+        {/* <MonthlyBalanceChart
           months={months}
           entries={entries}
           expenses={expenses}
-        />
+        /> */}
       </div>
     </div>
   );
