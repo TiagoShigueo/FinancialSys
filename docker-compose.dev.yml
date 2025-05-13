@@ -1,7 +1,7 @@
 services:
   db:
     image: mysql:latest
-    container_name: mysql_financialsys
+    container_name: mysql
     restart: always
     environment:
       - MYSQL_DATABASE=financialsysDB
@@ -25,7 +25,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: backend_financialsys
     ports:
       - "8080:8080"
@@ -35,16 +35,25 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/financialsysDB
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+    volumes:
+      - ./backend:/app
+      - ~/.m2:/root/.m2
+
+
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: frontend_financialsys
+    container_name: frontend
     ports:
       - "3000:3000"
     depends_on:
       - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
 
       
 volumes:
