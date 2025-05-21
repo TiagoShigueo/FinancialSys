@@ -27,3 +27,17 @@ CREATE TABLE IF NOT EXISTS transactions (
   FOREIGN KEY (destination_bank) REFERENCES banks(id_bank),
   FOREIGN KEY (user_id) REFERENCES users(id_user)
 );
+
+CREATE TABLE IF NOT EXISTS scheduledTransactions (
+  id_scheduled_transaction BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  recurence_type VARCHAR(255),
+  payment_date DATE,
+  total_installments INT,
+  amount DECIMAL(12,2),
+  description VARCHAR(255),
+  category VARCHAR(255),
+  bank_id BIGINT,
+  user_id BIGINT,
+  FOREIGN KEY (bank_id) REFERENCES banks(id_bank),
+  FOREIGN KEY (user_id) REFERENCES users(id_user)
+);
