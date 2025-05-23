@@ -18,40 +18,40 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ScheduledTransactionService {
-    @Autowired
-    private UserRepository userRepository;
+        @Autowired
+        private UserRepository userRepository;
 
-    @Autowired
-    private BankRepository bankRepository;
+        @Autowired
+        private BankRepository bankRepository;
 
-    @Autowired
-    private ScheduledTransactionRepository scheduledTransactionRepository;
+        @Autowired
+        private ScheduledTransactionRepository scheduledTransactionRepository;
 
-    public ScheduledTransactionDTO createScheduledTransaction(ScheduledTransactionDTO scheduledTransactionDto,
-            String username) {
-        User user = userRepository.findByName(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        public ScheduledTransactionDTO createScheduledTransaction(ScheduledTransactionDTO scheduledTransactionDto,
+                        String username) {
+                User user = userRepository.findByName(username)
+                                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        Bank bank = bankRepository.findById(scheduledTransactionDto.getBankId())
-                .orElseThrow(() -> new EntityNotFoundException("O banco não foi encontrado"));
+                Bank bank = bankRepository.findById(scheduledTransactionDto.getBankId())
+                                .orElseThrow(() -> new EntityNotFoundException("O banco não foi encontrado"));
 
-        ScheduledTransaction scheduledTransaction = new ScheduledTransaction();
-        scheduledTransaction = ScheduledTransactionMapper.toEntity(scheduledTransactionDto, user, bank);
+                ScheduledTransaction scheduledTransaction = new ScheduledTransaction();
+                scheduledTransaction = ScheduledTransactionMapper.toEntity(scheduledTransactionDto, user, bank);
 
-        ScheduledTransaction saved = scheduledTransactionRepository.save(scheduledTransaction);
+                ScheduledTransaction saved = scheduledTransactionRepository.save(scheduledTransaction);
 
-        ScheduledTransactionDTO dto = new ScheduledTransactionDTO();
-        dto = ScheduledTransactionMapper.toDTO(saved);
-        return dto;
-    }
+                ScheduledTransactionDTO dto = new ScheduledTransactionDTO();
+                dto = ScheduledTransactionMapper.toDTO(saved);
+                return dto;
+        }
 
-    public List<ScheduledTransactionDTO> getUserScheduledTransactions(String username) {
-        User user = userRepository.findByName(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
-        List<ScheduledTransaction> scheduledTransactions = scheduledTransactionRepository
-                .findAllByUser_IdUser(user.getIdUser());
-        List<ScheduledTransactionDTO> scheduledTransactionsDTO = scheduledTransactions.stream()
-                .map(ScheduledTransactionMapper::toDTO).toList();
-        return scheduledTransactionsDTO;
-    }
+        public List<ScheduledTransactionDTO> getUserScheduledTransactions(String username) {
+                User user = userRepository.findByName(username)
+                                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
+                List<ScheduledTransaction> scheduledTransactions = scheduledTransactionRepository
+                                .findAllByUserId_IdUser(user.getIdUser());
+                List<ScheduledTransactionDTO> scheduledTransactionsDTO = scheduledTransactions.stream()
+                                .map(ScheduledTransactionMapper::toDTO).toList();
+                return scheduledTransactionsDTO;
+        }
 }
