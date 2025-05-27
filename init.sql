@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS transactions (
   FOREIGN KEY (user_id) REFERENCES users(id_user)
 );
 
-CREATE TABLE IF NOT EXISTS scheduledTransactions (
+CREATE TABLE IF NOT EXISTS scheduled_transactions (
   id_scheduled_transaction BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   recurence_type VARCHAR(255),
   payment_date DATE,
