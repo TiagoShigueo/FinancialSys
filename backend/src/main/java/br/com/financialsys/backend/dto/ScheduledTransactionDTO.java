@@ -22,5 +22,5 @@ public class ScheduledTransactionDTO {
     private String description;
     private String category;
     private Long bankId;
-    private Long userId;
+    // private Long userId;
 }

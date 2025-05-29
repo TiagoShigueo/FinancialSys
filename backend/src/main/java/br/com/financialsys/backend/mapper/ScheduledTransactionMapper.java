@@ -30,7 +30,7 @@ public class ScheduledTransactionMapper {
         dto.setDescription(st.getDescription());
         dto.setCategory(st.getCategory());
         dto.setBankId(st.getBankId().getIdBank());
-        dto.setUserId(st.getUserId().getIdUser());
+        // dto.setUserId(st.getUserId().getIdUser());
         return dto;
     }
 }
