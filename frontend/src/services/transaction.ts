@@ -25,7 +25,6 @@ export const createTransaction = async (transaction: Transaction) => {
     }
 
     const data: Transaction = await res.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Erro na requisição: ", error);
