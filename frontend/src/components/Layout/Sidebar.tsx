@@ -31,6 +31,14 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="mb-2">
+            <Link
+              href="/scheduledTransactions"
+              className="block hover:bg-gray-700 p-2 rounded"
+            >
+              Transações agendadas
+            </Link>
+          </li>
+          <li className="mb-2">
             <Link href="/admin" className="block hover:bg-gray-700 p-2 rounded">
               Admin
             </Link>
