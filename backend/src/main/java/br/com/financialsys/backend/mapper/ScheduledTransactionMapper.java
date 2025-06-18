@@ -8,7 +8,6 @@ import br.com.financialsys.backend.model.User;
 public class ScheduledTransactionMapper {
     public static ScheduledTransaction toEntity(ScheduledTransactionDTO dto, User user, Bank bank) {
         ScheduledTransaction st = new ScheduledTransaction();
-        st.setIdScheduledTransaction(dto.getIdScheduledTransaction());
         st.setRecurenceType(dto.getRecurenceType());
         st.setPaymentDate(dto.getPaymentDate());
         st.setTotalInstallments(dto.getTotalInstallments());
