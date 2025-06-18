@@ -114,7 +114,8 @@ export default function Dashboard() {
           ))}
         </div>
         <div className="bg-gray-700 border-2 h-64 w-2/6">
-          <h1 className="text-center font-bold text-xl">Cartões</h1>
+          <h1 className="text-center font-bold text-xl">Cartões</h1>{" "}
+          {/*Adicionar campo para pagamentos futuros, e organizar por datas de pagamentos */}
         </div>
       </div>
 
