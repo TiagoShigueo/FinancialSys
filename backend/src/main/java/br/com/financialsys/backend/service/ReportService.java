@@ -69,10 +69,10 @@ public class ReportService {
                 List<Transaction> transactions = transactionRepository.findAllByUser_IdUser(user.getIdUser());
 
                 // Acho que dá para apagar essa linha
-                List<Transaction> filteredTransactions = transactions.stream()
-                                .filter(t -> t.getTransactionType() == TransactionType.Entrada
-                                                || t.getTransactionType() == TransactionType.Saída)
-                                .toList();
+                // List<Transaction> filteredTransactions = transactions.stream()
+                // .filter(t -> t.getTransactionType() == TransactionType.Entrada
+                // || t.getTransactionType() == TransactionType.Saída)
+                // .toList();
 
                 Map<YearMonth, List<Transaction>> grouped = transactions.stream()
                                 .filter(t -> t.getTransactionType() != TransactionType.Transferência)
