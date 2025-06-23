@@ -6,6 +6,7 @@ import br.com.financialsys.backend.model.User;
 public class UserMapper {
     public static UserDTO toDTO(User user) {
         UserDTO dto = new UserDTO();
+        dto.setIdUser(user.getIdUser());
         dto.setName(user.getName());
         dto.setRole(user.getRole());
         return dto;
