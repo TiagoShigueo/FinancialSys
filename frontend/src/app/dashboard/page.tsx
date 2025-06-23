@@ -146,7 +146,7 @@ export default function Dashboard() {
           ))}
         </div>
 
-        <div className="bg-gray-700 border-2 h-64 w-2/6">
+        <div className="bg-gray-700 border-2 h-64 w-2/6 overflow-y-auto">
           <h1 className="text-center font-bold text-xl">Cartões</h1>{" "}
         </div>
       </div>
