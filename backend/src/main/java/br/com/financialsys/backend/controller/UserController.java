@@ -17,7 +17,7 @@ import br.com.financialsys.backend.service.TokenService;
 import br.com.financialsys.backend.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private final UserService userService = new UserService();
@@ -30,7 +30,7 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
-    @GetMapping("/getUsers")
+    @GetMapping("/admin/getUsers")
     public List<User> getUsers() {
         return userService.getUsers();
     }
