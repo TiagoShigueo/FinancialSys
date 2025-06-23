@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.financialsys.backend.dto.PaymentDateGroupDTO;
 import br.com.financialsys.backend.dto.ScheduledTransactionDTO;
 import br.com.financialsys.backend.service.ScheduledTransactionService;
 
@@ -32,5 +33,11 @@ public class ScheduledTransactionController {
     public List<ScheduledTransactionDTO> getUserScheduledTransactions(Principal principal) {
         String username = principal.getName();
         return scheduledTransactionService.getUserScheduledTransactions(username);
+    }
+
+    @GetMapping("/getUserGroupedScheduled")
+    public List<PaymentDateGroupDTO> getUserGroupedScheduledTransactions(Principal principal) {
+        String username = principal.getName();
+        return scheduledTransactionService.getGroupedScheduledTransactions(username);
     }
 }

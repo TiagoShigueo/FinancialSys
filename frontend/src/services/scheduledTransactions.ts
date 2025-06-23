@@ -1,3 +1,4 @@
+import { PaymentDateGroup } from "@/types/paymentDateGroup";
 import { ScheduledTransaction } from "@/types/scheduledTransaction";
 import Cookies from "js-cookie";
 
@@ -43,6 +44,24 @@ export const getUserScheduledTransactions = async () => {
       },
     });
     const data: ScheduledTransaction[] = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Erro na requisição: ", error);
+  }
+};
+
+export const getUserGroupedScheduledTransactions = async () => {
+  const token = String("Bearer " + Cookies.get("token"));
+
+  try {
+    const res = await fetch(`${BASE_URL}/scheduled/getUserGroupedScheduled`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+    });
+    const data: PaymentDateGroup[] = await res.json();
     return data;
   } catch (error) {
     console.error("Erro na requisição: ", error);

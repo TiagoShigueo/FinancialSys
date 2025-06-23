@@ -1,11 +1,14 @@
 package br.com.financialsys.backend.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import br.com.financialsys.backend.dto.PaymentDateGroupDTO;
 import br.com.financialsys.backend.dto.ScheduledTransactionDTO;
 import br.com.financialsys.backend.mapper.ScheduledTransactionMapper;
 import br.com.financialsys.backend.model.Bank;
@@ -56,5 +59,19 @@ public class ScheduledTransactionService {
                 List<ScheduledTransactionDTO> scheduledTransactionsDTO = scheduledTransactions.stream()
                                 .map(ScheduledTransactionMapper::toDTO).toList();
                 return scheduledTransactionsDTO;
+        }
+
+        public List<PaymentDateGroupDTO> getGroupedScheduledTransactions(String username) {
+                User user = userRepository.findByName(username)
+                                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
+                List<ScheduledTransaction> transactions = scheduledTransactionRepository
+                                .findAllByUserId_IdUserOrderByPaymentDateDesc(user.getIdUser());
+
+                return transactions.stream()
+                                .collect(Collectors.groupingBy(ScheduledTransaction::getPaymentDate, LinkedHashMap::new,
+                                                Collectors.toList()))
+                                .entrySet().stream().map(entry -> new PaymentDateGroupDTO(entry.getKey(), entry
+                                                .getValue().stream().map(ScheduledTransactionMapper::toDTO).toList()))
+                                .toList();
         }
 }

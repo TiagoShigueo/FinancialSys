@@ -11,6 +11,14 @@ import {
 } from "@/services/transaction";
 import { MonthlySummary } from "@/types/monthlySummary";
 import dynamic from "next/dynamic";
+import { ScheduledTransaction } from "@/types/scheduledTransaction";
+import {
+  getUserGroupedScheduledTransactions,
+  getUserScheduledTransactions,
+} from "@/services/scheduledTransactions";
+import { formatDate } from "@/utils/formatDate";
+import { PaymentDateGroup } from "@/types/paymentDateGroup";
+import { lightningCssTransform } from "next/dist/build/swc/generated-native";
 const MonthlyBalanceChart = dynamic(
   () => import("@/components/Charts/MonthlyBalanceChart"),
   {
@@ -26,6 +34,8 @@ export default function Dashboard() {
   const [expenseCategoriesSummary, setExpenseCategoriesSummary] = useState<
     CategorySummary[]
   >([]);
+  const [scheduledTransactionsSummary, setScheduledTransactionsSummary] =
+    useState<PaymentDateGroup[]>([]);
   const [monthlySummary, setMonthlySummary] = useState<MonthlySummary[]>([]);
 
   const sortedMonthlySummary = [...monthlySummary].sort(
@@ -64,6 +74,11 @@ export default function Dashboard() {
       if (expenseCategoriesSummary)
         setExpenseCategoriesSummary(expenseCategoriesSummary);
 
+      const scheduledTransactionsSummary =
+        await getUserGroupedScheduledTransactions();
+      if (scheduledTransactionsSummary)
+        setScheduledTransactionsSummary(scheduledTransactionsSummary);
+      console.log(scheduledTransactionsSummary);
       const monthlySummary = await getMonthlySummary();
       if (monthlySummary) setMonthlySummary(monthlySummary);
     };
@@ -116,7 +131,19 @@ export default function Dashboard() {
 
         <div className="bg-gray-700 border-2 h-64 w-2/6 mr-4">
           <h1 className="text-center font-bold text-xl">Pagamentos futuros</h1>{" "}
-          {/*Adicionar campo para pagamentos futuros, e organizar por datas de pagamentos */}
+          {scheduledTransactionsSummary.map((group) => (
+            <div key={group.paymentDate}>
+              <h2>{formatDate(group.paymentDate)}</h2>
+
+              <ul>
+                {group.transactions.map((transaction) => (
+                  <li key={transaction.idScheduledTransaction}>
+                    {transaction.category}: R$ {transaction.amount}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className="bg-gray-700 border-2 h-64 w-2/6">
