@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.financialsys.backend.dto.LoginDTO;
+import br.com.financialsys.backend.dto.UserDTO;
 import br.com.financialsys.backend.model.User;
 import br.com.financialsys.backend.service.TokenService;
 import br.com.financialsys.backend.service.UserService;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/admin/getUsers")
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return userService.getUsers();
     }
 

@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.financialsys.backend.dto.LoginDTO;
+import br.com.financialsys.backend.dto.UserDTO;
+import br.com.financialsys.backend.mapper.UserMapper;
 import br.com.financialsys.backend.model.User;
 import br.com.financialsys.backend.repository.UserRepository;
 
@@ -23,8 +25,10 @@ public class UserService {
         return user;
     }
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> dto = users.stream().map(UserMapper::toDTO).toList();
+        return dto;
     }
 
     public boolean authenticateUser(LoginDTO login) {
