@@ -49,7 +49,10 @@ public class ScheduledTransactionService {
                 User user = userRepository.findByName(username)
                                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
                 List<ScheduledTransaction> scheduledTransactions = scheduledTransactionRepository
-                                .findAllByUserId_IdUser(user.getIdUser());
+                                .findAllByUserId_IdUserOrderByPaymentDateDesc(user.getIdUser());
+                // List<ScheduledTransaction> scheduledTransactions =
+                // scheduledTransactionRepository
+                // .findAllByUserId_IdUser(user.getIdUser());
                 List<ScheduledTransactionDTO> scheduledTransactionsDTO = scheduledTransactions.stream()
                                 .map(ScheduledTransactionMapper::toDTO).toList();
                 return scheduledTransactionsDTO;

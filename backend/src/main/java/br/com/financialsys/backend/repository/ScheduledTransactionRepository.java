@@ -9,5 +9,6 @@ import br.com.financialsys.backend.model.ScheduledTransaction;
 
 @Repository
 public interface ScheduledTransactionRepository extends JpaRepository<ScheduledTransaction, Long> {
-    List<ScheduledTransaction> findAllByUserId_IdUser(Long id);
+    List<ScheduledTransaction> findAllByUserId_IdUserOrderByPaymentDateDesc(Long id);
+    // List<ScheduledTransaction> findAllByUserId_IdUser(Long id);
 }
