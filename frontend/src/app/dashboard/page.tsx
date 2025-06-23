@@ -133,7 +133,9 @@ export default function Dashboard() {
           <h1 className="text-center font-bold text-xl">Pagamentos futuros</h1>{" "}
           {scheduledTransactionsSummary.map((group) => (
             <div key={group.paymentDate}>
-              <h2>{formatDate(group.paymentDate)}</h2>
+              <h2 className="font-bold mt-2">
+                {formatDate(group.paymentDate)}
+              </h2>
 
               <ul>
                 {group.transactions.map((transaction) => (
