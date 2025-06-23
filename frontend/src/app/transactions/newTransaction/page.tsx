@@ -40,7 +40,6 @@ export default function NewTransactions() {
 
   const handleCreateTransaction = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(transaction.originBankId);
     createTransaction(transaction);
     router.push("/transactions");
   };

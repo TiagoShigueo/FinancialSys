@@ -9,7 +9,6 @@ export default function Sidebar() {
   useEffect(() => {
     const fetchRole = async () => {
       const userRole = await getRole();
-      console.log(userRole);
       if (userRole) setRole(userRole);
     };
     fetchRole();

@@ -40,7 +40,6 @@ export default function NewScheduledTransactions() {
 
   const handleCreateScheduledTransaction = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(scheduledTransaction);
     createScheduledTransaction(scheduledTransaction);
     router.push("/scheduledTransactions");
   };

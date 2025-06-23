@@ -50,6 +50,5 @@ export const getRole = () => {
   const payload = parseJwt(token);
   const role = payload?.role || null;
 
-  console.log("Role:", role);
   return role;
 };

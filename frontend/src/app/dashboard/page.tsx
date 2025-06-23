@@ -78,7 +78,7 @@ export default function Dashboard() {
         await getUserGroupedScheduledTransactions();
       if (scheduledTransactionsSummary)
         setScheduledTransactionsSummary(scheduledTransactionsSummary);
-      console.log(scheduledTransactionsSummary);
+
       const monthlySummary = await getMonthlySummary();
       if (monthlySummary) setMonthlySummary(monthlySummary);
     };
