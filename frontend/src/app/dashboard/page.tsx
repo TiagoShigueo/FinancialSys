@@ -112,7 +112,7 @@ export default function Dashboard() {
           {incomeCategoriesSummary.map((incomeCategorySummary) => (
             <ul key={incomeCategorySummary.category}>
               <li>
-                {incomeCategorySummary.category}:
+                {incomeCategorySummary.category}:{" "}
                 {formatCurrency(incomeCategorySummary.total)}
               </li>
             </ul>
