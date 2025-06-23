@@ -23,7 +23,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/api/users/createUser", "/api/users/auth").permitAll()
+                        .requestMatchers("/", "/users/createUser", "/users/auth").permitAll()
+                        .requestMatchers("/users/admin/**").hasAuthority("Admin")
                         .requestMatchers("/banks/**", "/transactions/**", "/scheduled/**")
                         .hasAnyAuthority("Admin", "User")
                         .anyRequest().authenticated())
