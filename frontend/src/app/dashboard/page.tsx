@@ -19,6 +19,7 @@ import {
 import { formatDate } from "@/utils/formatDate";
 import { PaymentDateGroup } from "@/types/paymentDateGroup";
 import { lightningCssTransform } from "next/dist/build/swc/generated-native";
+import { formatCurrency } from "@/utils/formatCurrency";
 const MonthlyBalanceChart = dynamic(
   () => import("@/components/Charts/MonthlyBalanceChart"),
   {
@@ -98,7 +99,7 @@ export default function Dashboard() {
             className="p-2 m-2 w-40 text-center space-x-2 border-2 rounded-sm bg-gray-700"
           >
             <div>{balance.bankName}</div>
-            <div> R$ {balance.balance}</div>
+            <div> {formatCurrency(balance.balance)}</div>
           </div>
         ))}
       </div>
@@ -111,8 +112,8 @@ export default function Dashboard() {
           {incomeCategoriesSummary.map((incomeCategorySummary) => (
             <ul key={incomeCategorySummary.category}>
               <li>
-                {incomeCategorySummary.category}: R${" "}
-                {incomeCategorySummary.total}
+                {incomeCategorySummary.category}:
+                {formatCurrency(incomeCategorySummary.total)}
               </li>
             </ul>
           ))}
@@ -122,8 +123,8 @@ export default function Dashboard() {
           {expenseCategoriesSummary.map((expenseCategorySummary) => (
             <ul key={expenseCategorySummary.category}>
               <li>
-                {expenseCategorySummary.category}: R${" "}
-                {expenseCategorySummary.total}
+                {expenseCategorySummary.category}:{" "}
+                {formatCurrency(expenseCategorySummary.total)}
               </li>
             </ul>
           ))}
@@ -140,7 +141,7 @@ export default function Dashboard() {
               <ul>
                 {group.transactions.map((transaction) => (
                   <li key={transaction.idScheduledTransaction}>
-                    {transaction.category}: R$ {transaction.amount}
+                    {transaction.category}: {formatCurrency(transaction.amount)}
                   </li>
                 ))}
               </ul>
@@ -148,9 +149,9 @@ export default function Dashboard() {
           ))}
         </div>
 
-        <div className="bg-gray-700 border-2 h-64 w-2/6 overflow-y-auto">
+        {/* <div className="bg-gray-700 border-2 h-64 w-2/6 overflow-y-auto">
           <h1 className="text-center font-bold text-xl">Cartões</h1>{" "}
-        </div>
+        </div> */}
       </div>
 
       {/* Gráficos */}

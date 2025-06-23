@@ -5,6 +5,7 @@ import { TransactionResponse } from "@/types/transactionResponse";
 import { formatDate } from "@/utils/formatDate";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { formatCurrency } from "@/utils/formatCurrency";
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState<TransactionResponse[]>([]);
@@ -48,7 +49,7 @@ export default function Transactions() {
               <td>{transaction.destinationBank}</td>
               <td>{transaction.transactionType}</td>
               <td>{transaction.category}</td>
-              <td>{transaction.amount}</td>
+              <td>{formatCurrency(transaction.amount)}</td>
               <td>{transaction.description}</td>
             </tr>
           ))}

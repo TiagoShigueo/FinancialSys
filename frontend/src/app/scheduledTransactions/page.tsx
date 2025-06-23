@@ -2,6 +2,7 @@
 
 import { getUserScheduledTransactions } from "@/services/scheduledTransactions";
 import { ScheduledTransaction } from "@/types/scheduledTransaction";
+import { formatCurrency } from "@/utils/formatCurrency";
 import { formatDate } from "@/utils/formatDate";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -52,7 +53,7 @@ export default function ScheduledTransactions() {
               <td>{formatDate(String(scheduledTransaction.paymentDate))}</td>
               <td>{scheduledTransaction.category}</td>
               <td>{scheduledTransaction.totalInstallments}</td>
-              <td>{scheduledTransaction.amount}</td>
+              <td>{formatCurrency(scheduledTransaction.amount)}</td>
               <td>{scheduledTransaction.bankId}</td>
               {/* Acho que preciso criar uma type para retorno com o nome do banco */}
               <td>{scheduledTransaction.description}</td>
