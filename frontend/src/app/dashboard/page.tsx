@@ -106,7 +106,7 @@ export default function Dashboard() {
       {/* Resumos */}
 
       <div className="pt-4 flex">
-        <div className="bg-gray-700 border-2 h-64 w-2/6">
+        <div className="bg-gray-700 border-2 h-64 w-2/6 overflow-y-auto">
           <h1 className="text-center font-bold text-xl">Entradas</h1>
           {incomeCategoriesSummary.map((incomeCategorySummary) => (
             <ul key={incomeCategorySummary.category}>
@@ -117,7 +117,7 @@ export default function Dashboard() {
             </ul>
           ))}
         </div>
-        <div className="bg-gray-700 border-2 h-64 w-2/6 mx-4">
+        <div className="bg-gray-700 border-2 h-64 w-2/6 mx-4 overflow-y-auto">
           <h1 className="text-center font-bold text-xl">Saídas</h1>
           {expenseCategoriesSummary.map((expenseCategorySummary) => (
             <ul key={expenseCategorySummary.category}>
@@ -129,7 +129,7 @@ export default function Dashboard() {
           ))}
         </div>
 
-        <div className="bg-gray-700 border-2 h-64 w-2/6 mr-4">
+        <div className="bg-gray-700 border-2 h-64 w-2/6 mr-4 overflow-y-auto">
           <h1 className="text-center font-bold text-xl">Pagamentos futuros</h1>{" "}
           {scheduledTransactionsSummary.map((group) => (
             <div key={group.paymentDate}>
