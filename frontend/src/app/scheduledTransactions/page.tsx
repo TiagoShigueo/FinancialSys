@@ -37,26 +37,33 @@ export default function ScheduledTransactions() {
       <table className="table-auto border-separate border border-green-800">
         <thead>
           <tr>
-            <th>Frequência</th>
-            <th>Dia do pagamento</th>
-            <th>Categoria</th>
-            <th>Parcelas</th>
-            <th>Valor</th>
-            <th>Banco</th>
-            <th>Descrição</th>
+            <th className="px-2">Frequência</th>
+            <th className="px-2">Dia do pagamento</th>
+            <th className="px-2">Categoria</th>
+            <th className="px-2">Parcelas</th>
+            <th className="px-2">Valor</th>
+            <th className="px-2">Descrição</th>
           </tr>
         </thead>
         <tbody>
           {scheduledTransactions.map((scheduledTransaction) => (
             <tr key={scheduledTransaction.idScheduledTransaction}>
-              <td>{scheduledTransaction.recurenceType}</td>
-              <td>{formatDate(String(scheduledTransaction.paymentDate))}</td>
-              <td>{scheduledTransaction.category}</td>
-              <td>{scheduledTransaction.totalInstallments}</td>
-              <td>{formatCurrency(scheduledTransaction.amount)}</td>
-              <td>{scheduledTransaction.bankId}</td>
-              {/* Acho que preciso criar uma type para retorno com o nome do banco */}
-              <td>{scheduledTransaction.description}</td>
+              <td className="px-2 text-center">
+                {scheduledTransaction.recurenceType}
+              </td>
+              <td className="px-2 text-center">
+                {formatDate(String(scheduledTransaction.paymentDate))}
+              </td>
+              <td className="px-2 text-center">
+                {scheduledTransaction.category}
+              </td>
+              <td className="px-2 text-center">
+                {scheduledTransaction.totalInstallments}
+              </td>
+              <td className="px-2 text-center">
+                {formatCurrency(scheduledTransaction.amount)}
+              </td>
+              <td className="px-2">{scheduledTransaction.description}</td>
             </tr>
           ))}
         </tbody>

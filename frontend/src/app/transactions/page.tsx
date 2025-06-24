@@ -32,25 +32,33 @@ export default function Transactions() {
       <table className="table-auto border-separate border border-green-800">
         <thead>
           <tr>
-            <th>Data</th>
-            <th>Banco origem</th>
-            <th>Banco destino</th>
-            <th>Transação</th>
-            <th>Categoria</th>
-            <th>Valor</th>
-            <th>Descrição</th>
+            <th className="px-2">Data</th>
+            <th className="px-2">Banco origem</th>
+            <th className="px-2">Banco destino</th>
+            <th className="px-2">Transação</th>
+            <th className="px-2">Categoria</th>
+            <th className="px-2">Valor</th>
+            <th className="px-2">Descrição</th>
           </tr>
         </thead>
         <tbody>
           {transactions.map((transaction) => (
             <tr key={transaction.idTransaction}>
-              <td>{formatDate(String(transaction.date))}</td>
-              <td>{transaction.originBank}</td>
-              <td>{transaction.destinationBank}</td>
-              <td>{transaction.transactionType}</td>
-              <td>{transaction.category}</td>
-              <td>{formatCurrency(transaction.amount)}</td>
-              <td>{transaction.description}</td>
+              <td className="px-2 text-center">
+                {formatDate(String(transaction.date))}
+              </td>
+              <td className="px-2 text-center">{transaction.originBank}</td>
+              <td className="px-2 text-center">
+                {transaction.destinationBank}
+              </td>
+              <td className="px-2 text-center">
+                {transaction.transactionType}
+              </td>
+              <td className="px-2 text-center">{transaction.category}</td>
+              <td className="px-2 text-center">
+                {formatCurrency(transaction.amount)}
+              </td>
+              <td className="px-2">{transaction.description}</td>
             </tr>
           ))}
         </tbody>
