@@ -12,7 +12,7 @@ export default function admin() {
       if (usersData) setUsers(usersData);
     };
     fetchUsers();
-  });
+  }, []);
   return (
     <div className="min-h-screen">
       <h1 className="text-center font-bold text-xl justify-center">
